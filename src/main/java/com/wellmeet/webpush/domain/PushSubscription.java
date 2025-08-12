@@ -41,7 +41,12 @@ public class PushSubscription extends BaseEntity {
         this.active = true;
     }
 
-    public boolean isSameEnpPoint(String endpoint) {
+    public void update(PushSubscription updatedSubscription) {
+        this.p256dh = updatedSubscription.p256dh;
+        this.auth = updatedSubscription.auth;
+    }
+
+    public boolean isSameEndpoint(String endpoint) {
         return this.endpoint.equals(endpoint);
     }
 }

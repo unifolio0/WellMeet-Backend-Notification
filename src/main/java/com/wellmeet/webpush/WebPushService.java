@@ -7,7 +7,7 @@ import com.wellmeet.webpush.dto.SubscribeRequest;
 import com.wellmeet.webpush.dto.SubscribeResponse;
 import com.wellmeet.webpush.dto.TestPushRequest;
 import com.wellmeet.webpush.dto.UnsubscribeRequest;
-import com.wellmeet.webpush.infrastucture.WebPushSender;
+import com.wellmeet.webpush.infrastructure.WebPushSender;
 import com.wellmeet.webpush.repository.PushSubscriptionRepository;
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +26,11 @@ public class WebPushService {
     public SubscribeResponse subscribe(String userId, SubscribeRequest request) {
         List<PushSubscription> existingSubscriptions = pushSubscriptionRepository.findByUserId(userId);
         Optional<PushSubscription> pushSubscription = existingSubscriptions.stream()
-                .filter(subscription -> subscription.isSameEnpPoint(request.endpoint()))
+                .filter(subscription -> subscription.isSameEndpoint(request.endpoint()))
                 .findAny();
         if (pushSubscription.isPresent()) {
             PushSubscription subscription = pushSubscription.get();
+            subscription.update(request.toDomain(userId));
             return new SubscribeResponse(subscription);
         }
         PushSubscription subscription = request.toDomain(userId);

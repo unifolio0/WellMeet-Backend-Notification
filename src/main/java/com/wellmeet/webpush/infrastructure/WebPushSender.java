@@ -1,4 +1,4 @@
-package com.wellmeet.webpush.infrastucture;
+package com.wellmeet.webpush.infrastructure;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wellmeet.config.VapidConfig;
