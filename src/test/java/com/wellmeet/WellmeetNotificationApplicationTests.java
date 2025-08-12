@@ -1,4 +1,4 @@
-package com.wellmeet.notification;
+package com.wellmeet;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

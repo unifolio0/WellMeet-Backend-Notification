@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: wellmeet-notification
+  config:
+    import: classpath:local-secret.yml
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wellmeet_noti_test
+    username: root
+    password:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      platform: mysql
+      encoding: UTF-8
+
+cors:
+  origin: http://localhost:5173
+
+vapid:
+  public-key: ${secret.vapid.public-key}
+  private-key: ${secret.vapid.private-key}
+  subject: ${secret.vapid.subject}
